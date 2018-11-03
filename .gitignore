@@ -1,3 +1,5 @@
 auth.json
 node_modules/
 gachi.mp3
+*.mp4
+*.mp3

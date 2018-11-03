@@ -14,6 +14,7 @@ bot.on('message', msg => {
 	}
 });
 bot.on('message', message =>{
+	let dispatcher
 	if (!message.guild) return;
 
 	if (message.content === 'join') {
@@ -28,10 +29,27 @@ bot.on('message', message =>{
 			message.reply('Join en kanal først.')
 		}
 	}
+
 	if (message.content === 'gachi') {
 		console.log('gachimuchi');
 		message.member.voiceChannel.connection.playFile("./gachi.mp3");
 	}
+
+  if (message.content === 'flute') {
+    dispatcher = message.member.voiceChannel.connection.playFile('./youtube.mp4');
+  }
+
+	if (message.content.startsWith('!v')) {
+		console.log('Content: ' + message.content);
+			let volumeLevel = message.content.split(" ");
+			if (volumeLevel[1] === undefined) {
+				message.reply('Velg en verdi mellom 0.0 og 1.0');
+			} else {
+				console.log(volumeLevel[2]);
+				message.reply(dispatcher.volume);
+				dispatcher.setVolume(volumeLevel[1]);
+			}
+		}
 });
 
 bot.login(auth.token);
